@@ -1,127 +1,120 @@
+const Inquirer = require('inquirer')
+const fs = require('fs')
+
 // TODO: Include packages needed for this application
-const inquirer = require('inquirer');
-const fs = require('fs');
-const util = require('util');
 
-// Internal modules
-const api = require('./utils/api.js');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+// TODO: Create an array of questions for user input
 
-// Inquirer prompts for userResponses
-const questions = [
-    {
-        type: 'input',
-        message: "What is your GitHub username? (No @ needed)",
-        name: 'username',
-        default: 'cycy6-dev',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("A valid GitHub username is required.");
-            }
-            return true;
-        }
-    },
-    {
-        type: 'input',
-        message: "What is the name of your GitHub repo?",
-        name: 'repo',
-        default: 'readme-generator',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("A valid GitHub repo is required for a badge.");
-            }
-            return true;
-        }
-    },
-    {
-        type: 'input',
-        message: "What is the title of your project?",
-        name: 'title',
-        default: 'Project Title',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("A valid project title is required.");
-            }
-            return true;
-        }
-    },
-    {
-        type: 'input',
-        message: "Write a description of your project.",
-        name: 'description',
-        default: 'Project Description',
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return console.log("A valid project description is required.");
-            }
-            return true;
-        }
-    },
-    {
-        type: 'input',
-        message: "If applicable, describe the steps required to install your project for the Installation section.",
-        name: 'installation'
-    },
-    {
-        type: 'input',
-        message: "Provide instructions and examples of your project in use for the Usage section.",
-        name: 'usage'
-    },
-    {
-        type: 'input',
-        message: "If applicable, provide guidelines on how other developers can contribute to your project.",
-        name: 'contributing'
-    },
-    {
-        type: 'input',
-        message: "If applicable, provide any tests written for your application and provide examples on how to run them.",
-        name: 'tests'
-    },
-    {
-        type: 'list',
-        message: "Choose a license for your project.",
-        choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
-        name: 'license'
-    }
-];
+// TODO: Create a function to write README file
+function buildReadme(responses){
 
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
-        if (err) {
-          return console.log(err);
-        }
-      
-        console.log("Success! Your README.md file has been generated")
-    });
 }
 
-const writeFileAsync = util.promisify(writeToFile);
-
-
-// Main function
+// TODO: Create a function to initialize app
 async function init() {
-    try {
+   var answers = await Inquirer.prompt([
+      /* Pass your questions in here */
+      {
+          type: 'input',
+          message: `What is the title of your project?`,
+          name: 'readme',
+        },
+        {
+          type: 'input',
+          message: `Please enter a description of your project`,
+          name: 'description',
+        },
+        {
+          type: 'input',
+          message: `Please enter the installation instructions`,
+          name: 'installation',
+        },
+        {
+          type: 'input',
+          message: `Please enter usage instructions`,
+          name: 'usage',
+        },
+        {
+          type: 'input',
+          message: `Please enter contribution guidelines`,
+          name: 'contribution',
+        },
+        {
+          type: 'input',
+          message: `Please enter test instructions`,
+          name: 'test',
+        },
+        {
+          type: 'list',
+          message: `Please enter the project license`,
+          name: 'license',
+          choices: ['MIT', 'Apache-2.0', 'GPL-3.0', 'MPL-2.0', 'BSD-3-Clause']
+        },
+        {
+          type: 'input',
+          message: `Please enter your gitHub profile link`,
+          name: 'gitProfile',
+        },
+        {
+          type: 'input',
+          message: `Please enter your gitHub username`,
+          name: 'cycy6',
+        },
+        {
+          type: 'input',
+          message: `Please enter your email address`,
+          name: 'cycy6@gmail.com',
+        },
+    ]) 
+    fs.writeFileSync('README.md', buildReadme(answers))
+    console.log(answers)
+  }
 
-        // Prompt Inquirer questions
-        const userResponses = await inquirer.prompt(questions);
-        console.log("Your responses: ", userResponses);
-        console.log("Thank you for your responses! Fetching your GitHub data next...");
-    
-        // Call GitHub api for user info
-        const userInfo = await api.getUser(userResponses);
-        console.log("Your GitHub user info: ", userInfo);
-    
-        // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
-        console.log("Generating your README next...")
-        const markdown = generateMarkdown(userResponses, userInfo);
-        console.log(markdown);
-    
-        // Write markdown to file
-        await writeFileAsync('ExampleREADME.md', markdown);
 
-    } catch (error) {
-        console.log(error);
-    }
-};
-
+function buildReadme(answers){
+  if (answers.license == "MIT"){ 
+    licenseBadge = `[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)`
+  }
+  else if (answers.license == "Apache-2.0"){
+    licenseBadge = `[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)`
+  }
+  else if (answers.license == "GPL-3.0"){
+    licenseBadge = `[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)`
+  }
+  else if (answers.license == "MPL-2.0"){
+    licenseBadge = `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)`
+  }
+  else if (answers.license == "BSD-3-Clause"){
+    licenseBadge = `[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)`
+  }
+  return `
+  # ${answers.title}${licenseBadge}
+  ## Table of Contents  
+  [Project Description](#Project-Description)  
+  [Installation](#Installation)  
+  [Usage](#Usage)  
+  [Contribution](#Contribution)  
+  [Testing](#Testing)  
+  [Project License](#Project-License)  
+  [Contact](#Contact)  
+  ## Project Description
+  ${answers.description}
+  ## Installation
+  ${answers.installation}
+  ## Usage
+  ${answers.usage}
+  ## Contribution
+  ${answers.contribution}
+  ## Testing
+  ${answers.test}
+  ## Project License
+  ${answers.license}
+  ${licenseBadge}
+  ## Contact
+  GitHub Profile: ${answers.gitProfile}  
+  GitHub Username: ${answers.gitUsername}  
+  Email: ${answers.email}  
+  `
+} 
+// Function call to initialize app
 init();
