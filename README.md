@@ -9,8 +9,7 @@
   ## Project Description
   This generator allows the user to input important information required for confirmation such as licence, username, project type etc. Once completed the generator asks a series of questions inputed by the user data via the Readme Generator.
   ## Installation
-  git init
-  git install inquirer
+  git init and git install inquirer
   ## Usage
   https://youtu.be/mG9KtMt2p0w
   ## Project License
