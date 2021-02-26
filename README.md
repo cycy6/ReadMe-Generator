@@ -4,17 +4,15 @@
   [Project Description](#Project-Description)  
   [Installation](#Installation)  
   [Usage](#Usage)  
-  [Contribution](#Contribution) 
   [Project License](#Project-License)  
   [Contact](#Contact)  
   ## Project Description
-  description
+  This generator allows the user to input important information required for confirmation such as licence, username, project type etc. Once completed the generator asks a series of questions inputed by the user data via the Readme Generator.
   ## Installation
-  installation
+  git init
+  git install inquirer
   ## Usage
   https://youtu.be/mG9KtMt2p0w
-  ## Contribution
-  contribution
   ## Project License
   MIT
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
