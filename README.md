@@ -16,6 +16,7 @@
   MIT
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   ## Contact  
-  GitHub Username: cycy6 
+  GitHub Username: cycy6
+  Github profile: https://github.com/cycy6
   Email: cycy6@gmail.com 
   

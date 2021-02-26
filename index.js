@@ -35,16 +35,6 @@ async function init() {
           name: 'usage',
         },
         {
-          type: 'input',
-          message: `Please enter contribution guidelines`,
-          name: 'contribution',
-        },
-        {
-          type: 'input',
-          message: `Please enter test instructions`,
-          name: 'test',
-        },
-        {
           type: 'list',
           message: `Please enter the project license`,
           name: 'license',
@@ -92,10 +82,8 @@ function buildReadme(answers){
   ## Table of Contents  
   [Project Description](#Project-Description)  
   [Installation](#Installation)  
-  [Usage](#Usage)  
-  [Contribution](#Contribution)  
-  [Testing](#Testing)  
-  [Project License](#Project-License)  
+  [Usage](#Usage)     
+  [License](#Project-License)  
   [Contact](#Contact)  
   ## Project Description
   ${answers.description}
@@ -103,8 +91,6 @@ function buildReadme(answers){
   ${answers.installation}
   ## Usage
   ${answers.usage}
-  ## Contribution
-  ${answers.contribution}
   ## Testing
   ${answers.test}
   ## Project License
